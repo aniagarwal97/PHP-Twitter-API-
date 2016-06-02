@@ -2,17 +2,17 @@
 include "twitteroauth/twitteroauth.php";
 require 'connect.php';
 
-$consumer_key = "1CPBiGajkE91r3TMbDwCNYTln";
-$consumer_secret = "SSOpZB6BQ557xqefw0S37t2VMzLxkPQDI2tLWgqqCKbvvwM4Gm";
-$access_token = "439871616-Rdr3Cq89EuhZ13BtPPGvEOK0SbRvfnDAr8FrxfNq";
-$access_token_secret = "3M1j4CQ9nX06UgFquQcEgnBgzxVLv2XmuMY5yNQAKEFgA";
+$consumer_key = "Your_Consumer_Key";
+$consumer_secret = "Your_Consumer_Key_Secret";
+$access_token = "Your_Access_Token";
+$access_token_secret = "Your_Access_Token_Secret";
 
 $twitter = new TwitterOAuth($consumer_key, $consumer_secret, $access_token, $access_token_secret);
 $select = "SELECT max(since_id) AS sincemax FROM twitter_database";
 $query_run = mysqli_query($conn, $select);
 $query_row = mysqli_fetch_assoc($query_run);
 $since_id = $query_row['sincemax'];
-if ($tweets = $twitter->get('https://api.twitter.com/1.1/search/tweets.json?q=%23gameofthrones&result_type=recent&count=1&since_id=' . $since_id)) {
+if ($tweets = $twitter->get('https://api.twitter.com/1.1/search/tweets.json?q=The_specified_hash_tag&result_type=recent&count=1&since_id=' . $since_id)) {
    // print_r($tweets)
     foreach ($tweets->statuses as $key => $tweet) {
         $created_at = $tweet->created_at;
